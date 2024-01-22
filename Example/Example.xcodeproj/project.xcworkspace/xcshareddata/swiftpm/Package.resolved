@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "wwlocationmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWLocationManager",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ceaebebde305bad4686e28690db65b260e5b5ee4"
+      }
+    },
+    {
+      "identity" : "wwprint",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWPrint",
+      "state" : {
+        "revision" : "0acf1057863faea81c3ded2057c21b09c3435435",
+        "version" : "1.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}
