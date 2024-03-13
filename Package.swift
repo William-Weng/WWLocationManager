@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .target(name: "WWLocationManager", dependencies: []),
+        .target(name: "WWLocationManager", resources: [.copy("Privacy")]),
     ],
     swiftLanguageVersions: [
         .v5
