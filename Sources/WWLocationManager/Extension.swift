@@ -25,9 +25,9 @@ extension UIDevice {
     static func _isoCountryCodes() -> [String] {
         
         var codeArray = [String]()
-                    
+        
         if let info = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders {
-            for (_, value) in info { if let code = value.isoCountryCode { codeArray.append(code.uppercased()) } }
+            for (_, value) in info { if let code = value.isoCountryCode { codeArray.append(code.uppercased()) }}
         }
         
         return codeArray

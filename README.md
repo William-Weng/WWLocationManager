@@ -6,6 +6,7 @@
 - Find location-related settings on your phone. (Region / Language / SIM / GPS)
 - 找出手機上跟地點相關的設定。 (地區 / 語系 / SIM / GPS定位)
 - [Teaching - 設計教學](https://william-weng.github.io/2021/05/swift-5我到底身在何方我到底去到何處/)
+- [iOS 16.4之後，CTCarrier棄用 / isoCountryCode取不到了](https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-16_4-release-notes)
 
 ## [Achievements display - 成果展示](https://www.hkweb.com.hk/blog/ui設計基礎知識：引導頁對ui設計到底有什麼作用/)
 ![WWLocationManager](./Example.png)

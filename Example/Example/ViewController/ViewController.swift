@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Info.plist => NSLocationWhenInUseUsageDescription
+        // [Info.plist => NSLocationWhenInUseUsageDescription](https://medium.com/@merlos/how-to-simulate-locations-in-xcode-b0f7f16e126d)
         WWLocationManager.shared.countryCode { code in
             wwPrint(code)
         } failure: { error in
