@@ -13,11 +13,13 @@ open class WWLocationManager: NSObject {
     public static let shared = WWLocationManager()
     
     private var isAlways = false
-    private var completionBlock: ((Constant.LocationCountryCode?) -> Void)?
-    private var errorBlock: ((Error?) -> Void)?
+    private var resultBlock: ((Result<WWLocationManager.LocationCountryCode, Error>) -> Void)?
     
     private lazy var locationManager: CLLocationManager? = { CLLocationManager._build(delegate: self) }()
+    
     private override init() {}
+    
+    deinit { closeLocationManager() }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -50,22 +52,34 @@ public extension WWLocationManager {
     /// [取得有關所在位置的資訊 => 定位要開](https://blog.csdn.net/mingC0758/article/details/102820616)
     /// - Parameters:
     ///   - isAlways: 要一直定位嗎？
-    ///   - result: Constant.LocationCountryCode?
-    func countryCode(isAlways: Bool = false, result: @escaping (Constant.LocationCountryCode?) -> Void, failure: @escaping (Error?) -> Void) {
+    ///   - result: Result<WWLocationManager.LocationCountryCode, Error>) -> Void
+    func countryCode(isAlways: Bool = false, result: @escaping (Result<WWLocationManager.LocationCountryCode, Error>) -> Void) {
         
         closeLocationManager()
         
         self.isAlways = isAlways
-        completionBlock = result
-        errorBlock = failure
+        resultBlock = result
         
         locationManager?._locationServicesAuthorizationStatus(alwaysHandler: {
             self.locationManager?.startUpdatingLocation()
         }, whenInUseHandler: {
             self.locationManager?.startUpdatingLocation()
         }, deniedHandler: {
-            self.completionBlock?(CLLocationManager._locationCountryCode())
+            self.resultBlock?(.success(CLLocationManager._locationCountryCode()))
         })
+    }
+    
+    /// 取得該裝置的國家地域碼 (不包含GPS定位)
+    /// - Returns: LocationCountryCode
+    func locationCountryCode() -> WWLocationManager.LocationCountryCode {
+        CLLocationManager._locationCountryCode()
+    }
+    
+    /// 把完整的語系編碼分類 (zh-Hant-TW => [語系-分支-地區])
+    /// - Parameter language: 完整的語系文字
+    /// - Returns: Constant.LanguageInformation?
+    func preferredLanguageInfomation(_ language: String? = Locale.preferredLanguages.first) -> WWLocationManager.LanguageInformation? {
+        Locale._preferredLanguageInfomation(language)
     }
     
     /// 關閉定位
@@ -116,20 +130,19 @@ private extension WWLocationManager {
     /// - Parameters:
     ///   - code: Constant.LocationCountryCode?
     ///   - error: Error?
-    func postLocationCountryCode(_ code: Constant.LocationCountryCode? = nil, error: Error? = nil) {
+    func postLocationCountryCode(_ code: WWLocationManager.LocationCountryCode? = nil, error: Error? = nil) {
 
         let countryCode = code ?? CLLocationManager._locationCountryCode()
-        completionBlock?(countryCode)
+        resultBlock?(.success(countryCode))
         
         if (!isAlways) { closeLocationManager() }
-        if let error = error { errorBlock?(error) }
+        if let error = error { resultBlock?(.failure(error)) }
     }
     
     /// 清除LocationManager
     func closeLocationManager() {
         locationManager?.stopUpdatingLocation()
-        completionBlock = nil
-        errorBlock = nil
+        resultBlock = nil
         isAlways = false
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WWPrint
 import WWLocationManager
 
 final class ViewController: UIViewController {
@@ -15,10 +14,11 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         // [Info.plist => NSLocationWhenInUseUsageDescription](https://medium.com/@merlos/how-to-simulate-locations-in-xcode-b0f7f16e126d)
-        WWLocationManager.shared.countryCode { code in
-            wwPrint(code)
-        } failure: { error in
-            wwPrint(error)
+        WWLocationManager.shared.countryCode { result in
+            switch result {
+            case .success(let code): print(code)
+            case .failure(let error): print(error)
+            }
         }
     }
 }

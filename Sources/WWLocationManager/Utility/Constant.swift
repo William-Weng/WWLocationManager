@@ -8,11 +8,8 @@
 import UIKit
 import CoreLocation
 
-// MARK: - Constant
-open class Constant: NSObject {}
-
 // MARK: - typealias
-public extension Constant {
+public extension WWLocationManager {
     
     typealias LocationInformation = (location: CLLocation?, isAvailable: Bool)                                              // 定位的相關資訊
     typealias LocationCountryCode = (GPS: String?, SIMs: [String], preferredLanguage: String?, region: String?)             // 定位位置 => [GPS / SIM卡 / 首選語言 / 區域]
@@ -20,10 +17,10 @@ public extension Constant {
 }
 
 // MARK: - Error
-extension Constant {
+public extension WWLocationManager {
     
     /// 自訂錯誤
-    enum MyError: Error, LocalizedError {
+    enum CustomError: Error, LocalizedError {
         
         var errorDescription: String { errorMessage() }
 

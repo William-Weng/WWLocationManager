@@ -49,7 +49,7 @@ extension Locale {
     /// - zh-Hant-TW => [語系-分支-地區]
     /// - Parameter language: 完整的語系文字
     /// - Returns: Constant.LanguageInformation?
-    static func _preferredLanguageInfomation(_ language: String? = Locale.preferredLanguages.first) -> Constant.LanguageInformation? {
+    static func _preferredLanguageInfomation(_ language: String? = Locale.preferredLanguages.first) -> WWLocationManager.LanguageInformation? {
 
         guard let preferredLanguage = language,
               let languageInfos = Optional.some(preferredLanguage.split(separator: "-")),
@@ -58,7 +58,7 @@ extension Locale {
             return nil
         }
 
-        var info: Constant.LanguageInformation = (nil, nil, nil)
+        var info: WWLocationManager.LanguageInformation = (nil, nil, nil)
 
         switch languageInfos.count {
         case 1: info.code = languageInfos.first
@@ -93,7 +93,7 @@ extension CLLocationCoordinate2D {
             if let error = error { result(.failure(error)); return }
             if let placemark = placemarks?.first { result(.success(placemark)); return }
             
-            result(.failure(Constant.MyError.notGeocodeLocation))
+            result(.failure(WWLocationManager.CustomError.notGeocodeLocation))
         }
     }
 }
@@ -120,9 +120,9 @@ extension CLLocationManager {
     
     /// 取得該裝置的國家地域碼 (不包含GPS定位)
     /// - Returns: LocationCountryCode
-    static func _locationCountryCode() -> Constant.LocationCountryCode {
+    static func _locationCountryCode() -> WWLocationManager.LocationCountryCode {
         
-        var code = Constant.LocationCountryCode(GPS: nil, SIMs: [], preferredLanguage: nil, region: nil)
+        var code = WWLocationManager.LocationCountryCode(GPS: nil, SIMs: [], preferredLanguage: nil, region: nil)
         
         code.SIMs = UIDevice._isoCountryCodes()
         code.region = Locale._currentRegionCode()
@@ -159,7 +159,7 @@ extension CLLocationManager {
     /// - 最後一筆的有效位置 > 0
     /// - Parameter locations: 取到的位置們
     /// - Returns: Constant.LocationInformation
-    func _locationInfomation(with locations: [CLLocation]) -> Constant.LocationInformation {
+    func _locationInfomation(with locations: [CLLocation]) -> WWLocationManager.LocationInformation {
 
         guard let location = locations.last,
               let isAvailable = Optional.some(location.horizontalAccuracy > 0)
