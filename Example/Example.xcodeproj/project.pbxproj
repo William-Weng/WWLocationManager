@@ -12,8 +12,9 @@
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
 		3DBCD87D26F198F300522E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87C26F198F300522E3B /* Assets.xcassets */; };
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
+		8149F06E2EA0E852001016D4 /* WWLocationManager in Frameworks */ = {isa = PBXBuildFile; productRef = 8149F06D2EA0E852001016D4 /* WWLocationManager */; };
+		8149F0712EA0EE4D001016D4 /* WWLocationManager in Frameworks */ = {isa = PBXBuildFile; productRef = 8149F0702EA0EE4D001016D4 /* WWLocationManager */; };
 		81877E2B2EA0DD91007B5982 /* WWLocationManager in Frameworks */ = {isa = PBXBuildFile; productRef = 81877E2A2EA0DD91007B5982 /* WWLocationManager */; };
-		81877E2E2EA0E073007B5982 /* WWLocationManager in Frameworks */ = {isa = PBXBuildFile; productRef = 81877E2D2EA0E073007B5982 /* WWLocationManager */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +36,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81877E2B2EA0DD91007B5982 /* WWLocationManager in Frameworks */,
-				81877E2E2EA0E073007B5982 /* WWLocationManager in Frameworks */,
+				8149F0712EA0EE4D001016D4 /* WWLocationManager in Frameworks */,
+				8149F06E2EA0E852001016D4 /* WWLocationManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +134,8 @@
 			name = Example;
 			packageProductDependencies = (
 				81877E2A2EA0DD91007B5982 /* WWLocationManager */,
-				81877E2D2EA0E073007B5982 /* WWLocationManager */,
+				8149F06D2EA0E852001016D4 /* WWLocationManager */,
+				8149F0702EA0EE4D001016D4 /* WWLocationManager */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -163,7 +166,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				81877E2C2EA0E073007B5982 /* XCRemoteSwiftPackageReference "WWLocationManager" */,
+				8149F06F2EA0EE4D001016D4 /* XCRemoteSwiftPackageReference "WWLocationManager" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -411,7 +414,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		81877E2C2EA0E073007B5982 /* XCRemoteSwiftPackageReference "WWLocationManager" */ = {
+		8149F06F2EA0EE4D001016D4 /* XCRemoteSwiftPackageReference "WWLocationManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWLocationManager";
 			requirement = {
@@ -422,13 +425,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		81877E2A2EA0DD91007B5982 /* WWLocationManager */ = {
+		8149F06D2EA0E852001016D4 /* WWLocationManager */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WWLocationManager;
 		};
-		81877E2D2EA0E073007B5982 /* WWLocationManager */ = {
+		8149F0702EA0EE4D001016D4 /* WWLocationManager */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81877E2C2EA0E073007B5982 /* XCRemoteSwiftPackageReference "WWLocationManager" */;
+			package = 8149F06F2EA0EE4D001016D4 /* XCRemoteSwiftPackageReference "WWLocationManager" */;
+			productName = WWLocationManager;
+		};
+		81877E2A2EA0DD91007B5982 /* WWLocationManager */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = WWLocationManager;
 		};
 /* End XCSwiftPackageProductDependency section */

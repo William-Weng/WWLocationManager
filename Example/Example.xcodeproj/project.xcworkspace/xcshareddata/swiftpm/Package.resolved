@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWLocationManager",
       "state" : {
-        "revision" : "bf37f9ed9c7b61dfc6fe9d33feab47a31831affc",
-        "version" : "1.0.1"
+        "revision" : "7c933691302cd65aa5f9bb7e09b9620a5158a9f4",
+        "version" : "1.0.2"
       }
     }
   ],

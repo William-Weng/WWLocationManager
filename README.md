@@ -16,7 +16,7 @@
 
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWLocationManager.git", .upToNextMajor(from: "1.0.2"))
+    .package(url: "https://github.com/William-Weng/WWLocationManager.git", .upToNextMajor(from: "1.1.0"))
 ]
 ```
 
@@ -25,6 +25,7 @@ dependencies: [
 |函式|功能|
 |-|-|
 |countryCode(isAlways:result:)|取得有關所在位置的資訊 (Info.plist => NSLocationWhenInUseUsageDescription)|
+|countryCode()|取得有關所在位置的資訊 (單次 / 持續)|
 |locationCountryCode()|取得該裝置的國家地域碼 (不包含GPS定位)|
 |preferredLanguageInfomation(_:)|把完整的語系編碼分類 (zh-Hant-TW => [語系-分支-地區])|
 |close()|關閉定位|

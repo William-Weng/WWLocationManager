@@ -14,6 +14,7 @@ open class WWLocationManager: NSObject {
     
     private var isAlways = false
     private var resultBlock: ((Result<WWLocationManager.LocationCountryCode, Error>) -> Void)?
+    private var continuation: AsyncThrowingStream<WWLocationManager.LocationCountryCode, any Error>.Continuation?
     
     private lazy var locationManager: CLLocationManager? = { CLLocationManager._build(delegate: self) }()
     
@@ -69,6 +70,36 @@ public extension WWLocationManager {
         })
     }
     
+    /// 取得有關所在位置的資訊 (單次)
+    /// - Returns: Result<WWLocationManager.LocationCountryCode, any Error>
+    @MainActor
+    func countryCode() async -> Result<WWLocationManager.LocationCountryCode, any Error> {
+        
+        await withCheckedContinuation { continuation in
+            WWLocationManager.shared.countryCode(isAlways: false) { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
+    
+    /// 取得有關所在位置的資訊 (持續)
+    /// - Returns: AsyncThrowingStream<WWLocationManager.LocationCountryCode, Error>
+    @MainActor
+    func countryCode() -> AsyncThrowingStream<WWLocationManager.LocationCountryCode, Error> {
+        
+        AsyncThrowingStream { continuation in
+            
+            self.continuation = continuation
+            
+            WWLocationManager.shared.countryCode(isAlways: true) { result in
+                switch result {
+                case .success(let code): continuation.yield(with: .success(code))
+                case .failure(let error): continuation.yield(with: .failure(error))
+                }
+            }
+        }
+    }
+    
     /// 取得該裝置的國家地域碼 (不包含GPS定位)
     /// - Returns: LocationCountryCode
     func locationCountryCode() -> WWLocationManager.LocationCountryCode {
@@ -83,7 +114,12 @@ public extension WWLocationManager {
     }
     
     /// 關閉定位
-    func close() { closeLocationManager() }
+    @MainActor
+    func close() {
+        continuation?.finish()
+        continuation = nil
+        closeLocationManager()
+    }
 }
 
 // MARK: - 定位相關 (CLLocationManager)
